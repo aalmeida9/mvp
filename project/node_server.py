@@ -6,7 +6,9 @@ import time
 from flask import Flask, request
 import requests
 
-
+#block could hold the information of the mac address table or flow table
+#mac address table contains the hosts connected to a switch and their ports
+#flow table contains in-port: #, eth-dst: Host -> output: Port
 class Block:
     def __init__(self, index, transactions, timestamp, previous_hash, nonce=0):
         self.index = index
