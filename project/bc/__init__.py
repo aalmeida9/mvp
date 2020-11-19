@@ -1,5 +1,5 @@
 from flask import Flask, request
-from . import node_server
+#from . import node_server
 
 def create_app():
     app_name = 'bc'
@@ -11,5 +11,5 @@ def create_app():
     @app.route("/")
     def hello():
         return 'Hello ' + app_name + '! request.url = ' + request.url
-    
+
     return app

@@ -1,15 +1,6 @@
 from flask import Flask, request
+#config: https://exploreflask.com/en/latest/configuration.html
 
-def create_app():
-    app_name = 'frontend'
-    print('app_name = {}'.format(app_name))
+app = Flask(__name__)
 
-    # create app
-    app = Flask(__name__, instance_relative_config=True)
-
-    @app.route("/")
-    def hello():
-        return 'Hello ' + app_name + '! request.url = ' + request.url
-    
-    # return app
-    return app
+from frontend import views
