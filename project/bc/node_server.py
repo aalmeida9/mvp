@@ -9,6 +9,9 @@ import requests
 #block could hold the information of the mac address table or flow table
 #mac address table contains the hosts connected to a switch and their ports
 #flow table contains in-port: #, eth-dst: Host -> output: Port
+
+#currently posts are stored in the BC and contain: Content, Author, timestamp
+#Transcations are data, and a block can contain one to many transacations
 class Block:
     def __init__(self, index, transactions, timestamp, previous_hash, nonce=0):
         self.index = index
@@ -197,6 +200,7 @@ def mine_unconfirmed_transactions():
         return "Block #{} is mined.".format(blockchain.last_block.index)
 
 
+# not sure how useful this code will be for MVP
 # endpoint to add new peers to the network.
 @app.route('/register_node', methods=['POST'])
 def register_new_peers():
