@@ -156,13 +156,13 @@ peers = set()
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    required_fields = ["author", "content"]
+    required_fields = ["nw_src", "nw_dst", "nw_proto", "action"]
 
     for field in required_fields:
         if not tx_data.get(field):
             return "Invalid transaction data", 404
 
-    tx_data["timestamp"] = time.time()
+    #tx_data["timestamp"] = time.time()
 
     blockchain.add_new_transaction(tx_data)
 

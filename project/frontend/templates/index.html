@@ -5,7 +5,44 @@
     <title>{{ title }}</title>
   </head>
   <body>
-    <div><a href="/">Home</a></div>
+    <h3>Add a Rule</h3>
+    <form action="/add" id="textform" method="post">
+      Source IP:
+      <input type="text" name="src" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+      <br />
+      Destination IP:
+      <input type="text" name="dst" placeholder="10.0.0.x" />
+      <br />
+      <input type = "radio" name = "action" value = "allow" checked> Allow
+      <input type = "radio" name = "action" value = "deny"> Deny
+      <select name="dropdown">
+          <option value="Any" selected>Any</option>
+          <option value="ICMP">ICMP</option>
+      </select>
+      <input type="submit" value="Post">
+    </form>
+    <br />
 
+    <a href="{{node_address}}/mine" target="_blank"><button>Validate new block</button></a>
+    <a href="/"><button>Resync</button></a>
+    <a href="{{ryu_address}}"><button>View Topology</button></a>
+
+    <h3>Current Rules</h3>
+    <table>
+    <tr class="table_row">
+      <td>IP Source</td>
+      <td>IP Destination</td>
+      <td>Protocol Type</td>
+      <td>Action</td>
+    </tr>
+    {% for rule in rules %}
+      <tr class="table_row">
+        <td>{{rule.nw_src}}</td>
+        <td>{{rule.nw_dst}}</td>
+        <td>{{rule.nw_proto}}</td>
+        <td>{{rule.action}}</td>
+      </tr>
+    {% endfor %}
+    </table>
   </body>
 </html>
