@@ -2,10 +2,44 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
+    <title>ZT Demo</title>
+    <style>
+    body {
+      background-color: darkgreen;
+      }
+    h1{
+      color: white;
+    }
+    h2{
+      color: white;
+    }
+    #connection {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #connection td, #connection th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #connection tr:nth-child(odd){background-color: #f2f2f2;}
+    #connection tr:nth-child(even){background-color: #ffffff;}
+
+    #connection tr:hover {background-color: #ddd;}
+
+    #connection th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: black;
+    }
+    </style>
   </head>
   <body>
-    <h3>Add a Rule</h3>
+    <h1>Add a Rule</h1>
     <form action="/add" id="textform" method="post">
       Source IP:
       <input type="text" name="src" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
@@ -27,13 +61,13 @@
     <a href="/"><button>Resync</button></a>
     <a href="{{ryu_address}}"><button>View Topology</button></a>
 
-    <h3>Current Rules</h3>
-    <table>
+    <h2>Current Rules</h2>
+    <table id = "connection">
     <tr class="table_row">
-      <td>IP Source</td>
-      <td>IP Destination</td>
-      <td>Protocol Type</td>
-      <td>Action</td>
+      <th>IP Source</th>
+      <th>IP Destination</th>
+      <th>Protocol Type</th>
+      <th>Action</th>
     </tr>
     {% for rule in rules %}
       <tr class="table_row">
