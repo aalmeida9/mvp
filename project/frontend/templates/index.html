@@ -42,16 +42,18 @@
     <h1>Add a Rule</h1>
     <form action="/add" id="textform" method="post">
       Source IP:
-      <input type="text" name="src" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+      <input type="text" name="src">
       <br />
       Destination IP:
       <input type="text" name="dst" placeholder="10.0.0.x" />
       <br />
-      <input type = "radio" name = "action" value = "allow" checked> Allow
-      <input type = "radio" name = "action" value = "deny"> Deny
+      <input type = "radio" name = "actions" value = "ALLOW" checked> Allow
+      <input type = "radio" name = "actions" value = "DENY"> Deny
       <select name="dropdown">
-          <option value="Any" selected>Any</option>
-          <option value="ICMP">ICMP</option>
+          <option value="ICMP" selected>ICMP</option>
+          <option value="ICMPv6">ICMPv6</option>
+          <option value="TCP">TCP</option>
+          <option value="UDP">UDP</option>
       </select>
       <input type="submit" value="Post">
     </form>

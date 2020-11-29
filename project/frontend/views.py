@@ -11,14 +11,14 @@ BC_ADDRESS = "http://127.0.0.1:8000"
 
 #address to the ryu controller
 RYU_ADDRESS = "http://0.0.0.0:8080"
-#alternatively: "http://127.0.0.1:8080" "http://localhost:8080"
+#alternatives "http://127.0.0.1:8080" "http://localhost:8080"
 
 ruleList = []
-#potentially create rule class based on  rule formats, rule_id
+#potentially create rule class based on  rule format
 #{"nw_src": "10.0.0.1/32", "nw_dst": "10.0.0.2/32", "nw_proto": "ICMP"} pings
 #rules are registered to the switch as flow entries
 
-#make sure duplicate rules don't get added to firewall 
+#make sure duplicate rules don't get added to firewall
 cRules = ()
 
 
@@ -40,15 +40,12 @@ def get_rules():
         print("Unable to access blockchain {}".format(response.status_code))
 
 #configure SDN firewall with rules from BC, current method works
-#still need to enable communication on Firewall:
+#still need to enable communication manually on Firewall:
 #put http://localhost:8080/firewall/module/enable/0000000000000001
 def post_rules():
     address = "{}/firewall/rules/0000000000000001".format(RYU_ADDRESS)
     rule = {"nw_src": "10.0.0.1/32", "nw_dst": "10.0.0.2/32", "nw_proto": "ICMP"}
     r = requests.post(address, data=rule)
-
-    #make sure to remove timestamp before sending POST request
-    #for rule in ruleList:
 
 
 @app.route("/")
@@ -66,13 +63,13 @@ def add():
     ip_src = request.form["src"]
     ip_dst = request.form["dst"]
     type = request.form["dropdown"]
-    action = request.form['action']
+    action = request.form['actions']
 
     rule = {
         'nw_src': ip_src,
         'nw_dst': ip_dst,
         'nw_proto': type,
-        'action': action
+        'actions': action
     }
 
     # Submit a transaction to the blockchain
