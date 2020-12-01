@@ -1,27 +1,53 @@
-Recommended project setup: \
-git clone https://github.com/aalmeida9/mvp.git \
-cd mvp\
-python3 -m venv venv\
-source venv/bin/activate\
-pip install -e . \
-Or: pip install -r requirements.txt
+# Zero Trust Architecture with Blockchain virtual lab
 
-To-dos (there's plenty more):
-* Define routes to access info on node_server
-* Define routes for changing firewall rules on Ryu controller
-* Create user friendly interface
+## Project setup
 
-Blockchain based on this repository:\
-https://github.com/satwikkansal/python_blockchain_app/tree/ibm_blockchain_post \
-To run the Blockchain (node_server):\
-export FLASK_APP=node_server.py\
-flask run --port 8000
+Ubuntu 18.04 is currently used for the development environment
 
-To run the actual web server application (use different terminal):\
-export FLASK_APP=run.py\
-export FLASK_ENV=development\
-flask run
+```sh
+# clone and enter repository
+$ git clone https://github.com/aalmeida9/mvp.git
+$ cd mvp
+# setup and enter python virtual environment (optional)
+$ python3 -m venv venv
+$ source venv/bin/activate
+# install required python packages
+$ pip install -e .
+# Or: pip install -r requirements.txt
+```
 
-To run the network emulation with Ryu: \
-sudo mn --topo single,3 --mac --switch ovsk --controller remote \
-ryu-manager ryu.app.rest_firewall
+## Flask Applications
+
+The frontend web server and Blockchain application use the Flask microframework. The implementation of Blockchain is based on this repository: https://github.com/satwikkansal/python_blockchain_app/tree/ibm_blockchain_post
+
+Each of the following blocks of commands need to be run in different terminals in order for the project to work properly.
+
+### Blockchain startup
+
+```sh
+$ export FLASK_APP=node_server.py
+$ export FLASK_ENV=development
+$ flask run --port 8000
+```
+
+### Frontend Web server
+
+```sh
+$ python run.py
+```
+
+## Network Emulation
+
+Network emulation uses Mininet. More information can be found here: http://mininet.org/
+
+```sh
+$ sudo mn --topo single,3 --mac --switch ovsk --controller remote
+```
+
+## Software Defined Networking (SDN) Controller
+
+SDN controller use the Ryu framework for the firewall application. More information can be found here: https://ryu-sdn.org/
+
+```sh
+$ ryu-manager ryu.app.rest_firewall
+```
