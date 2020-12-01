@@ -42,7 +42,29 @@ class Blockchain:
         the chain. The block has index 0, previous_hash as 0, and
         a valid hash.
         """
-        genesis_block = Block(0, [], 0, "0")
+        #example data for demonstrating Blockchain for authenticaiton
+        exampleRule1 = {
+            "nw_src": "10.0.0.1",
+            "nw_dst": "10.0.0.2",
+            "nw_proto": "ICMP",
+            "actions": "ALLOW"
+        }
+
+        exampleRule2 = {
+            "nw_src": "10.0.0.2",
+            "nw_dst": "10.0.0.1",
+            "nw_proto": "ICMP",
+            "actions": "ALLOW"
+        }
+        #returns a String
+        ruleString1 = json.dumps(exampleRule1)
+        ruleString2 = json.dumps(exampleRule2)
+        #creates a hash
+        ruleHash1 = sha256(ruleString1.encode()).hexdigest()
+        ruleHash2 = sha256(ruleString2.encode()).hexdigest()
+
+
+        genesis_block = Block(0, [ruleHash1, ruleHash2], 0, "0")
         genesis_block.hash = genesis_block.compute_hash()
         self.chain.append(genesis_block)
 
