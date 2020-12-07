@@ -2,11 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>ZT Demo</title>
+    <title>MVP Demo</title>
     <style>
     body {
       background-color: darkgreen;
       }
+    form {
+      color: white;
+    }
     h1{
       color: white;
     }
@@ -42,10 +45,10 @@
     <h1>Add a Rule</h1>
     <form action="/add" id="textform" method="post">
       Source IP:
-      <input type="text" name="src">
+      <input type="text" name="src" placeholder = "10.0.0.x">
       <br />
       Destination IP:
-      <input type="text" name="dst" placeholder="10.0.0.x" />
+      <input type="text" name="dst" placeholder="10.0.0.x">
       <br />
       <input type = "radio" name = "actions" value = "ALLOW" checked> Allow
       <input type = "radio" name = "actions" value = "DENY"> Deny
@@ -61,7 +64,6 @@
 
     <a href="{{node_address}}/mine" target="_blank"><button>Validate new block</button></a>
     <a href="/"><button>Resync</button></a>
-    <a href="{{ryu_address}}"><button>View Topology</button></a>
 
     <h2>Current Rules</h2>
     <table id = "connection">

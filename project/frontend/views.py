@@ -39,7 +39,8 @@ def get_rules():
                 if block["index"] == 0:
                     hashList.append(rule)
                 else:
-                    ruleList.append(rule)
+                    if rule not in ruleList:
+                        ruleList.append(rule)
     else:
         print("Unable to access blockchain {}".format(response.status_code))
 
@@ -87,6 +88,7 @@ def add():
         ruleHash = sha256(ruleString.encode()).hexdigest()
         for hashes in hashList:
             if hashes == ruleHash:
+                print("Hash matched: {}".format(hashes))
                 print("Rule Authenticated: {}".format(rule))
                 #add a redirect to double check a rule as is?
                 if rule not in ruleList:
